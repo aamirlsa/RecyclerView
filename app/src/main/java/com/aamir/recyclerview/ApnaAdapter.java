@@ -1,10 +1,13 @@
 package com.aamir.recyclerview;
 
 import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,8 @@ public class ApnaAdapter extends RecyclerView.Adapter<ApnaAdapter.MyViewHolder>
     Integer img[], empid[];
     String name[];
     Activity activity;
+
+
 
     public ApnaAdapter(Activity activity,
                        Integer img[],
@@ -32,8 +37,10 @@ public class ApnaAdapter extends RecyclerView.Adapter<ApnaAdapter.MyViewHolder>
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view=activity.getLayoutInflater()
-                .inflate(R.layout.custom_layout,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_layout, parent,false);
+
+        /*View view=activity.getLayoutInflater()
+                .inflate(R.layout.custom_layout,parent,false)*/;
         MyViewHolder holder=new MyViewHolder(view);
 
         return holder;
@@ -44,6 +51,16 @@ public class ApnaAdapter extends RecyclerView.Adapter<ApnaAdapter.MyViewHolder>
         holder.imageView.setImageResource(img[position]);
         holder.tv1.setText(name[position]);
         holder.tv2.setText(""+empid[position]);
+
+       holder.tv2.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Toast.makeText(activity, "aamir malik", Toast.LENGTH_SHORT).show();
+           }
+       });
+
+
+
     }
 
     @Override
@@ -60,6 +77,8 @@ public class ApnaAdapter extends RecyclerView.Adapter<ApnaAdapter.MyViewHolder>
             imageView=itemView.findViewById(R.id.img);
             tv1=itemView.findViewById(R.id.name);
             tv2=itemView.findViewById(R.id.empid);
+
+
         }
     }
 
